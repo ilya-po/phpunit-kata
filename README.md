@@ -3,6 +3,8 @@ testing practice
 
 ## installation
 `docker run -it --rm -v $PWD:/app --entrypoint bash composer`
+
+
 `composer install`
 
 ## running tests
