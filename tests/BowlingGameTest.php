@@ -97,6 +97,42 @@ class BowlingGameTest extends \PHPUnit\Framework\TestCase
         $score = $game->getScore();
     }
 
+    public function testGetScore_withUnfinishedLastSpare_throwsException()
+    {
+        $this->expectException(UnfinishedGameException::class);
+
+        //set up
+        $game = new BowlingGame();
+
+        for ($i = 0; $i < 18; $i++) {
+            $game->roll(1);
+        }
+        // 18 + 10 + 10 (bonus) + 10 (bonus)
+        $game->roll(10);
+        $game->roll(6);
+
+        //test
+        $score = $game->getScore();
+    }
+
+    public function testGetScore_withUnfinishedLastStrikes_throwsException()
+    {
+        $this->expectException(UnfinishedGameException::class);
+
+        //set up
+        $game = new BowlingGame();
+
+        for ($i = 0; $i < 18; $i++) {
+            $game->roll(1);
+        }
+        // 18 + 10 + 10 (bonus) + 10 (bonus)
+        $game->roll(10);
+        $game->roll(10);
+
+        //test
+        $score = $game->getScore();
+    }
+
     public function testRoll_withOversizedSpare_throwsException()
     {
         $this->expectException(FrameOverflowException::class);
